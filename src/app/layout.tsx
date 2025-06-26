@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
+        {/* <link
           rel="stylesheet"
           href="assets/css/all.min.css"
           precedence="default"
@@ -54,16 +54,16 @@ export default function RootLayout({
           rel="stylesheet"
           href="assets/css/media-query.css"
           precedence="default"
-        />
+        /> */}
       </head>
       <body className={`${spaceGrotesk.variable} ${lato.variable}`}>
         {children}
         <InstallPrompt />
       </body>
-      <Script src="assets/js/bootstrap.bundle.min.js" />
+      {/* <Script src="assets/js/bootstrap.bundle.min.js" />
       <Script src="assets/js/jquery-min-3.6.0.js" />
       <Script src="assets/js/slick.min.js" />
-      <Script src="assets/js/custom.js" />
+      <Script src="assets/js/custom.js" /> */}
     </html>
   );
 }

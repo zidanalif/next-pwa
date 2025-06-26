@@ -51,38 +51,9 @@ export default function InstallPrompt() {
   return (
     <>
       {showPrompt && (
-        <div
-          className="offcanvas offcanvas-bottom addtohome-popup theme-offcanvas show"
-          tabIndex={-1}
-          id="offcanvas"
-          aria-modal="true"
-          role="dialog"
-        >
-          <button
-            type="button"
-            className="btn-close text-reset popup-close-home"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
-          <div className="offcanvas-body small">
-            <img
-              className="logo-popup"
-              src="assets/images/splash-screen/logo.png"
-              alt="logo"
-            />
-            <p className="title font-w600">Zoop Store</p>
-            <p>
-              Install Zoop Retail Store Multipurpose eCommerce Mobile App
-              Template to your home screen for easy access, just like any other
-              app
-            </p>
-            <button
-              className="theme-btn install-app btn-inline addhome-btn"
-              onClick={handleInstallClick}
-            >
-              Add to Home Screen
-            </button>
-          </div>
+        <div>
+          Install this app on your device for a better experience.
+          <button onClick={handleInstallClick}>Add to Home Screen</button>
         </div>
       )}
       {isIOS && (
