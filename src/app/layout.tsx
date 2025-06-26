@@ -1,7 +1,6 @@
 import InstallPrompt from "@/components/InstalPrompt";
 import type { Metadata } from "next";
 import { Space_Grotesk, Lato } from "next/font/google";
-import Script from "next/script";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -29,41 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* <link
-          rel="stylesheet"
-          href="assets/css/all.min.css"
-          precedence="default"
-        />
-        <link
-          rel="stylesheet"
-          href="assets/css/slick.css"
-          precedence="default"
-        />
-        <link
-          rel="stylesheet"
-          href="assets/css/bootstrap.min.css"
-          precedence="default"
-        />
-        <link
-          rel="stylesheet"
-          href="assets/css/style.css"
-          precedence="default"
-        />
-        <link
-          rel="stylesheet"
-          href="assets/css/media-query.css"
-          precedence="default"
-        /> */}
-      </head>
       <body className={`${spaceGrotesk.variable} ${lato.variable}`}>
         {children}
         <InstallPrompt />
       </body>
-      {/* <Script src="assets/js/bootstrap.bundle.min.js" />
-      <Script src="assets/js/jquery-min-3.6.0.js" />
-      <Script src="assets/js/slick.min.js" />
-      <Script src="assets/js/custom.js" /> */}
     </html>
   );
 }
