@@ -1,3 +1,4 @@
+import InstallPrompt from "@/components/InstalPrompt";
 import type { Metadata } from "next";
 import { Space_Grotesk, Lato } from "next/font/google";
 import Script from "next/script";
@@ -57,11 +58,11 @@ export default function RootLayout({
       </head>
       <body className={`${spaceGrotesk.variable} ${lato.variable}`}>
         {children}
+        <InstallPrompt />
       </body>
       <Script src="assets/js/bootstrap.bundle.min.js" />
       <Script src="assets/js/jquery-min-3.6.0.js" />
       <Script src="assets/js/slick.min.js" />
-      {/* <Script src="assets/js/modal.js" /> */}
       <Script src="assets/js/custom.js" />
     </html>
   );

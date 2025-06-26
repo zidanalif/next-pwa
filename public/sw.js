@@ -1,11 +1,10 @@
-const CACHE_NAME = "nextjs-pwa-cache-v1";
+const CACHE_NAME = "mms";
 const OFFLINE_URL = "/offline";
 
 const urlsToCache = ["/", OFFLINE_URL];
 
 // Saat instalasi service worker
 self.addEventListener("install", (event) => {
-  console.log("[SW] Installing...");
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(urlsToCache);
@@ -15,7 +14,6 @@ self.addEventListener("install", (event) => {
 
 // Aktivasi dan membersihkan cache lama jika ada
 self.addEventListener("activate", (event) => {
-  console.log("[SW] Activating...");
   event.waitUntil(
     caches
       .keys()

@@ -1,21 +1,10 @@
 "use client";
 
-import InstallPrompt from "@/components/InstalPrompt";
 import { useEffect } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").then(
-        (reg) => console.log("[SW] Registered:", reg),
-        (err) => console.error("[SW] Register failed:", err)
-      );
-    }
-  }, []);
-
   return (
     <div className="site-content">
-      <InstallPrompt />
       <header id="top-navbar" className="top-navbar">
         <div className="container">
           <div className="top-navbar_full">

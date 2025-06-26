@@ -20,7 +20,6 @@ export default function InstallPrompt() {
 
     // Handle event beforeinstallprompt (Android & Chrome)
     const handleBeforeInstallPrompt = (e: Event) => {
-      console.log("[PWA] beforeinstallprompt fired"); // Tambahan log ini
       e.preventDefault();
       setDeferredPrompt(e);
       setShowPrompt(true);
@@ -42,32 +41,50 @@ export default function InstallPrompt() {
   const handleInstallClick = async () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === "accepted") {
-        console.log("User accepted the install prompt");
-      } else {
-        console.log("User dismissed the install prompt");
-      }
+      await deferredPrompt.userChoice;
+
       setDeferredPrompt(null);
       setShowPrompt(false);
     }
   };
 
   return (
-    <div
-      style={{
-        border: "1px solid #ccc",
-        padding: "1rem",
-        borderRadius: "8px",
-        marginTop: "1rem",
-      }}
-    >
-      <h3>Install App</h3>
-
+    <>
       {showPrompt && (
-        <button onClick={handleInstallClick}>Install on this device</button>
+        <div
+          className="offcanvas offcanvas-bottom addtohome-popup theme-offcanvas show"
+          tabIndex={-1}
+          id="offcanvas"
+          aria-modal="true"
+          role="dialog"
+        >
+          <button
+            type="button"
+            className="btn-close text-reset popup-close-home"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+          <div className="offcanvas-body small">
+            <img
+              className="logo-popup"
+              src="assets/images/splash-screen/logo.png"
+              alt="logo"
+            />
+            <p className="title font-w600">Zoop Store</p>
+            <p>
+              Install Zoop Retail Store Multipurpose eCommerce Mobile App
+              Template to your home screen for easy access, just like any other
+              app
+            </p>
+            <button
+              className="theme-btn install-app btn-inline addhome-btn"
+              onClick={handleInstallClick}
+            >
+              Add to Home Screen
+            </button>
+          </div>
+        </div>
       )}
-
       {isIOS && (
         <p>
           On iOS, tap the{" "}
@@ -83,6 +100,6 @@ export default function InstallPrompt() {
           </strong>
         </p>
       )}
-    </div>
+    </>
   );
 }
