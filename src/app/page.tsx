@@ -9,7 +9,7 @@ interface Product {
 }
 
 async function getProduct(): Promise<Product[]> {
-  const res = await fetch("https://localhost:3000/api/products");
+  const res = await fetch("/api/products");
   return res.json() as Promise<Product[]>;
 }
 
