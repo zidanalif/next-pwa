@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface Product {
   id: number;
@@ -13,8 +15,20 @@ async function getProduct(): Promise<Product[]> {
   return res.json() as Promise<Product[]>;
 }
 
-export default async function Home() {
-  const products = await getProduct();
+export default function Home() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const data = await getProduct();
+      setProducts(data);
+    };
+    fetchProducts();
+  }, []);
+
+  if (products.length === 0) {
+    return <p className="text-center text-gray-500">No products available.</p>;
+  }
 
   return (
     <>
