@@ -1,4 +1,4 @@
-export default () => {
+export default function AccountIcon() {
   return (
     <svg
       width="18"
@@ -29,4 +29,4 @@ export default () => {
       </g>
     </svg>
   );
-};
+}

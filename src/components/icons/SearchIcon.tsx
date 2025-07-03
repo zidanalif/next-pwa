@@ -1,4 +1,4 @@
-export default () => {
+export default function SearchIcon() {
   return (
     <svg
       width="18"
@@ -36,4 +36,4 @@ export default () => {
       </g>
     </svg>
   );
-};
+}
