@@ -53,7 +53,7 @@ export default function Page() {
         />
         <button onClick={handleLogin}>Login</button>
       </div>
-      {isLoggedIn && <p>Login successful!</p>}
+      {isLoggedIn && <p>Login successful! s</p>}
       {loginError && <p>Error: {loginError}</p>}
     </>
   );
