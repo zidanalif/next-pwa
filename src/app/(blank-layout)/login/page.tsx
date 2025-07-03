@@ -12,14 +12,17 @@ export default function Page() {
       setIsLoggedIn(false);
       setLoginError("");
 
-      const response = await fetch(`${process.env.API_URL}/auth/login`, {
-        credentials: "include", // Include cookies in the request
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+        {
+          credentials: "include", // Include cookies in the request
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (response.ok) {
         await response.json();
