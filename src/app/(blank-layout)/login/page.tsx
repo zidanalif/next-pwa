@@ -13,7 +13,7 @@ export default function Page() {
       setLoginError("");
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
         {
           credentials: "include", // Include cookies in the request
           method: "POST",
