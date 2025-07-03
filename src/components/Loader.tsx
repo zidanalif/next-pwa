@@ -1,4 +1,4 @@
-const loading = () => {
+const loader = () => {
   return (
     <div className="site-content">
       <div className="loader-mask">
@@ -8,4 +8,4 @@ const loading = () => {
   );
 };
 
-export default loading;
+export default loader;

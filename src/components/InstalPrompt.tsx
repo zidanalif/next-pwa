@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function InstallPrompt() {
@@ -9,16 +10,13 @@ export default function InstallPrompt() {
   const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
-    // Cek apakah app sudah di-install (PWA standalone mode)
     const standalone = window.matchMedia("(display-mode: standalone)").matches;
     setIsStandalone(standalone);
 
-    // Deteksi iOS
     const userAgent = window.navigator.userAgent;
     const ios = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
     setIsIOS(ios);
 
-    // Handle event beforeinstallprompt (Android & Chrome)
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e);
@@ -35,7 +33,6 @@ export default function InstallPrompt() {
     };
   }, []);
 
-  // Jika sudah diinstall, tidak tampilkan prompt
   if (isStandalone) return null;
 
   const handleInstallClick = async () => {
@@ -48,28 +45,50 @@ export default function InstallPrompt() {
     }
   };
 
+  const handleClosePrompt = () => {
+    setShowPrompt(false);
+  };
+
   return (
     <>
       {showPrompt && (
-        <div>
-          Install this app on your device for a better experience.
-          <button onClick={handleInstallClick}>Add to Home Screen</button>
+        <div
+          className="offcanvas offcanvas-bottom addtohome-popup theme-offcanvas show"
+          tabIndex={-1}
+          id="offcanvas"
+          aria-modal="true"
+          role="dialog"
+        >
+          <button
+            type="button"
+            className="btn-close text-reset popup-close-home"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+            onClick={handleClosePrompt}
+          ></button>
+          <div className="offcanvas-body small">
+            <Image
+              className="logo-popup"
+              src="/logo.png"
+              alt="logo"
+              width={42}
+              height={40}
+            />
+            <p className="title font-w600">Zoop Store</p>
+            <p>
+              {isIOS
+                ? "To install the Zoop Retail Store Multipurpose eCommerce Mobile App Template on your iOS device, tap the share icon and select 'Add to Home Screen'."
+                : "Install Zoop Retail Store Multipurpose eCommerce Mobile App Template to your home screen for easy access, just like any other app"}
+            </p>
+            <button
+              className="theme-btn install-app btn-inline addhome-btn"
+              id="installApp"
+              onClick={handleInstallClick}
+            >
+              Add to Home Screen
+            </button>
+          </div>
         </div>
-      )}
-      {isIOS && (
-        <p>
-          On iOS, tap the{" "}
-          <span role="img" aria-label="Share">
-            ⬆️
-          </span>{" "}
-          then select{" "}
-          <strong>
-            “Add to Home Screen”{" "}
-            <span role="img" aria-label="Plus">
-              ➕
-            </span>
-          </strong>
-        </p>
       )}
     </>
   );
