@@ -6,6 +6,7 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [profile, setProfile] = useState<{ email: string } | null>(null);
 
   const handleLogin = async () => {
     try {
@@ -15,11 +16,8 @@ export default function Page() {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
         {
-          credentials: "include", // Include cookies in the request
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          credentials: "include", // Include cookies for session management
           body: JSON.stringify({ email, password }),
         }
       );
@@ -27,6 +25,15 @@ export default function Page() {
       if (response.ok) {
         await response.json();
         setIsLoggedIn(true);
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/account/profile`,
+          {
+            method: "GET",
+            credentials: "include", // Include cookies for session management
+          }
+        );
+        const data = await res.json();
+        setProfile(data.data);
       } else {
         const errorData = await response.json();
         throw new Error(errorData.message || "Login failed");
@@ -55,6 +62,7 @@ export default function Page() {
       </div>
       {isLoggedIn && <p>Login successful!</p>}
       {loginError && <p>Error: {loginError}</p>}
+      {profile && <div>{profile.email}</div>}
     </>
   );
 }
